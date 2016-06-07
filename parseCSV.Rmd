@@ -22,7 +22,7 @@ d <- data %>%
   ungroup() %>%
   mutate(subreddit = factor(subreddit)) %>%
   mutate(titleLength = nchar(as.character(title)))
-d$subreddit
+
 ```
 
 ### Exploratory analyses

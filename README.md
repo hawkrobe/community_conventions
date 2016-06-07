@@ -14,8 +14,8 @@ To replicate our analyses:
 cat ../../titles.txt | syntaxnet/demo.sh > ../../out.txt
 ```
 
-4) Tranform the conll output back to a csv, which can be joined with the original data and analyzed in the R markdown document:
+4) Tranform the conll output back to csv form, which can be joined with the original data and analyzed in the R markdown document:
 
 ```
-python parse_conll.py
+python parse_conll.py out.txt
 ```
