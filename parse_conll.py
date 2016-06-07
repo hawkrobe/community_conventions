@@ -1,32 +1,34 @@
 import csv
+import sys
 
-count = 0
+rowNumber = 1
+filename = sys.argv[1]
+newFilename = "new" + filename.capitalize()
 
 def writeHeader() :
-    with open('newOut.txt', 'w') as f:
-        f.write("row\tsentence\twordIndex\tform\tlemma"
-                + "\tupostag\txpostag\tfeats\thead\tdeprel\tdeps\tmisc\n")
+    colNames = ["row", "sentence", "wordIndex", "form", "lemma",
+                "upostag", "xpostag", "feats", "head", "deprel", "deps", "misc"]
+    with open(newFilename, 'w') as f:
+        f.write("\t".join(colNames) + "\n")
 
 def writeChunk(currSentence, lines) :
-    with open('newOut.txt', 'a') as f:
+    with open(newFilename, 'a') as f:
         for line in lines :
-            newLine = str(count) + "\t" + ' '.join(currSentence) + "\t" + line
-            print newLine
+            newLine = str(rowNumber) + "\t" + ' '.join(currSentence) + "\t" + line
             f.write(newLine)
 
-with open("out.txt",'r') as file :
+with open(filename, 'r') as file :
     writeHeader()
     currSentence = []
     lines = []
     for line in file:
         cols = line[:-1].split("\t")
-        print cols
         if len(cols) == 1:
             # Reset sentence
             writeChunk(currSentence, lines)            
             currSentence = []
             lines = []
-            count = count + 1
+            rowNumber = rowNumber + 1
         else :
             currSentence.append(cols[1])
             lines.append(line)
